@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+#app{
+    margin-top: 0 !important;
+}
+.navBar{
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    button{
+        width: 100%;
+        cursor: pointer;
+        transition-duration: 0.2s;
+        border: none;
+        outline: none;
+        color: black;
+        font-weight: bold;
+        &:hover{
+            background-color: rgba(160, 160, 160, 0.315);
+        }
+    }
+}
+.list{
+    max-height: 70vh;
+    overflow-y: scroll;
+    .list-header{
+        display: flex;
+        justify-content: center;
+        div{
+            width: 100%;
+            padding: 10px 20px;
+            background-color: rgb(190, 190, 190);
+            color: black !important;
+        }
+    }
+    .list-notAvailable{
+        background-color: rgb(255, 164, 164);
+    }
+    .list-available{
+        background-color: rgb(142, 255, 142);
+    }
+    .list-item{
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+        cursor: pointer;
+        transition-duration: 0.2s;
+        &:hover{
+            opacity: 0.8;
+        }
+        div{
+            width: 100%;
+            padding: 10px 20px;
+            color: black;
+        }
+    }
+}
