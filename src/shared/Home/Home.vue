@@ -16,7 +16,7 @@
                 <div>Taken By</div>
             </div>
             <div  v-for="(item, index) in list">
-                <div class="list-item list-notAvailable" v-if="item.TakerID == '' || item.TakerID == undefined || item.TakerID == null">
+                <div class="list-item list-notAvailable" v-if="item.TakerID == '' || item.TakerID == undefined || item.TakerID == null" v-on:click="showTaker(item, false)">
                     <div class="list-name">{{item.ItemName}}</div>
                     <div class="list-roomFound">{{item.RoomFound}}</div>
                     <div class="list-pcNumber">{{item.PCNumber}}</div>
@@ -25,7 +25,7 @@
                     <div class="list-statusNot" >Not Taken</div>
                     <div class="list-statusNot">None</div>
                 </div>
-                <div class="list-item list-available" v-else>
+                <div class="list-item list-available" v-else  v-on:click="showTaker(item, true)">
                     <div class="list-name">{{item.ItemName}}</div>
                     <div class="list-roomFound">{{item.RoomFound}}</div>
                     <div class="list-pcNumber">{{item.PCNumber}}</div>
@@ -36,6 +36,7 @@
                 </div>
             </div>
         </div>
+        <component :key="renderer" v-bind:is="popup"></component>
     </div>
 </template>
 

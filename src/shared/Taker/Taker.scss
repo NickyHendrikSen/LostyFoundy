@@ -1,0 +1,93 @@
+.taker-wrapper{
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px #38383883;
+    padding: 10px;
+    justify-content: center;
+    min-height: 50vh;
+    max-height: 80vh;
+    overflow-y: scroll;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    transform: translate(10%, -50%);
+    .taker-form{
+        .taker-pic{
+            width: 40%;
+            margin-top: 10px !important;
+        }
+        .taker-form-input{
+            div{
+                text-align: left;
+                margin-left: 5% !important;
+                color: black;
+                margin-top: 10px !important;
+            }
+            input{
+                border: none;
+                outline: none;
+                border-bottom: 1px solid black;
+                transition-duration: 0.5s;
+                margin-top: 5px !important;
+                width: 90%;
+                margin-top: 5px !important;
+                font-size: 20px;
+                &:focus{
+                    background-color: #c4c4c483;
+                }
+            }
+        }
+        .btnInsertTaker{
+            margin-top: 5px !important;
+            padding: 5px;
+            background-color: #93ff93fa;
+            outline: none;
+            border: 1px solid black;
+            border-radius: 4px;
+            cursor: pointer;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+    }
+    .taker-close{
+        padding: 1px 5px;
+        background-color: transparent;
+        border-radius: 5px;
+        border: none;;
+        outline: none;
+        color: red;
+        font-weight: bold;
+        position: absolute;
+        top: 2%;
+        right: 5%;
+        font-size: 20px;
+        transition-duration: 0.5s;
+        cursor: pointer;
+        &:hover{
+            background-color: #c7c7c783;
+        }
+    }
+    .taker-title{
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    .taker-input{
+        margin-top: 10px !important;
+        div{
+            color: black;
+        }
+        select{
+            border: none;
+            outline: none;
+            border-bottom: 1px solid black;
+            transition-duration: 0.5s;
+            margin-top: 5px !important;
+            cursor: pointer;
+            &:focus{
+                background-color: #c4c4c483;
+            }
+        }
+    }
+}

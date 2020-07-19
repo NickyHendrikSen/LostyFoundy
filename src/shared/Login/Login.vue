@@ -1,5 +1,6 @@
 <template>
     <div class="login-wrapper">
+        <button class="login-close" v-on:click="close()">X</button>
         <div class="login-card">
             <div class="login-title">Login</div>
                 <div class="login-input-wrapper">
@@ -19,50 +20,5 @@
 </script>
 
 <style lang="scss">
-.login-wrapper{
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    .login-card{
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-        padding: 1%;
-        width: 20%;
-        background-color: white;
-        border-radius: 4px;
-        box-shadow: 1px 1px 1px 1px #aaaaaa;
-        .login-title{
-            font-weight: bold;
-            font-size: 25px;
-        }
-        .login-input-wrapper{
-            margin-top: 10px;
-            text-align: left;
-            input{
-                border: none;
-                border-bottom: 1px solid black;
-                outline: none;
-                transition-duration: .5s;
-                width: 100%;
-                &:focus{
-                    background-color: rgba(219, 219, 219, 0.678);
-                }
-            }
-        }
-        button{
-            color: black;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid black;
-            margin-top: 20px !important;
-            cursor: pointer;
-            outline: none;
-            &:hover{
-                background-color: rgb(228, 228, 228);
-            }
-        }
-    }
-}
+    @import './Login.scss';
 </style>

@@ -12,6 +12,9 @@ export default {
         }
     },
     methods:{
+        close(){
+            this.$parent.popUpClose()
+        },
         login(){
             if(this.post.Username == "" || this.post.Username == null){
                 alert("Username can't be empty")
@@ -43,7 +46,8 @@ export default {
                 let auth = data.data.login
                 this.$cookies.set('Auth', auth, auth.tokenExpiration + "h")
                 alert('Success Login')
-                this.$router.push('/home')
+                this.$parent.forceUpdate()
+                this.$parent.popUpClose()
             }).catch((err) => {
                 alert(err.networkError.result.errors[0].message)
             })

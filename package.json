@@ -19,7 +19,8 @@
     "vue": "^2.6.11",
     "vue-apollo": "^3.0.3",
     "vue-cookies": "^1.7.2",
-    "vue-router": "^3.3.4"
+    "vue-router": "^3.3.4",
+    "vue-web-cam": "^1.9.0"
   },
   "browserslist": [
     "> 1%",

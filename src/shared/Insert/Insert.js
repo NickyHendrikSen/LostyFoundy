@@ -17,6 +17,9 @@ export default {
         }
     },
     methods:{
+        close(){
+            this.$parent.popUpClose()
+        },
         insert()
         {
             this.item.UserID = this.$cookies.get('Auth').ID

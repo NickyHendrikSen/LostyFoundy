@@ -10,7 +10,9 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 import VueCookies from 'vue-cookies'
+import VueWebCam from "vue-web-cam";
 
+Vue.use(VueWebCam)
 Vue.use(VueApollo)
 Vue.use(VueCookies)
 
@@ -31,10 +33,11 @@ const apolloProvider = new VueApollo({
 Vue.use(VueRouter)
 
 const routes = [
-  {path: '/login', component: LoginComponent},
+  // {path: '/login', component: LoginComponent},
   {path: '/home', component: HomeComponent},
-  {path: '/insert', component: InsertComponent},
-  {path: '/taker', component: TakerComponent},
+  {path: '/', component: HomeComponent},
+  // {path: '/insert', component: InsertComponent},
+  // {path: '/taker', component: TakerComponent},
 ]
 
 const router = new VueRouter({

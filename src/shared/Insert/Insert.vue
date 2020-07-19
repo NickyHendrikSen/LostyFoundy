@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="insert-wrapper">
+        <button class="insert-close" v-on:click="close()">X</button>
         <div class="insert-title">Insert</div>
         <div class="insert-form">
             <div class="insert-input">
