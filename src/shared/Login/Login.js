@@ -25,6 +25,8 @@ export default {
                 return;
             }
 
+            this.$parent.loading = true
+
             const newTag = this.post
             
             this.$apollo.query({
@@ -46,10 +48,11 @@ export default {
                 let auth = data.data.login
                 this.$cookies.set('Auth', auth, auth.tokenExpiration + "h")
                 alert('Success Login')
-                this.$parent.forceUpdate()
                 this.$parent.popUpClose()
+                this.$parent.loading = false
             }).catch((err) => {
                 alert(err.networkError.result.errors[0].message)
+                this.$parent.loading = false
             })
 
         }

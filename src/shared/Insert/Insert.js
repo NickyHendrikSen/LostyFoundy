@@ -1,41 +1,49 @@
 import Vue from 'vue'
 import gql from 'graphql-tag'
+import PhotoComponent from "../TakePhoto/TakePhoto.vue"
 
 export default {
     name:"Insert",
+    components : {
+        'photo': PhotoComponent
+    },
     data(){
         return{
             item:{
-                UserID: null,
+                UserID: '',
                 TakerID: '',
                 ItemName: null,
                 RoomFound: null,
                 PCNumber: null,
                 FoundDate: null,
                 FoundShift: null,
-            }
+            },
+            photoComponent: 'photo',
+            pic: null
         }
     },
     methods:{
+        updatePicture(url){
+            this.pic = url
+            this.$parent.loading = false
+        },
+        typeClose(){
+            this.photoComponent = null
+            this.$forceUpdate()
+        },
         close(){
             this.$parent.popUpClose()
         },
         insert()
         {
+            this.$parent.loading = true
             this.item.UserID = this.$cookies.get('Auth').ID
             let itemToBeInserted = this.item
-
             const mutation = {
                 query: `
                     mutation { 
-                        insertItem(itemInput: {ItemName : "${itemToBeInserted.ItemName}", RoomFound : "${itemToBeInserted.RoomFound}", PCNumber : ${itemToBeInserted.PCNumber}, FoundDate : "${itemToBeInserted.FoundDate}", FoundShift : ${itemToBeInserted.FoundShift}}){
-                            ID,
-                            TakerID,
-                            ItemName,
-                            RoomFound,
-                            PCNumber,
-                            FoundDate,
-                            FoundShift
+                        insertItem(itemInput: {ItemName : "${itemToBeInserted.ItemName}", RoomFound : "${itemToBeInserted.RoomFound}", PCNumber : ${itemToBeInserted.PCNumber}, FoundDate : "${itemToBeInserted.FoundDate.toString()}", FoundShift : ${itemToBeInserted.FoundShift}, ItemImage : "${this.pic}"}){
+                            ID
                         }
                         
                     }
@@ -52,15 +60,15 @@ export default {
                     Auth: token
                 }
                 })
-                .then(res => {
-                    alert('Success')
-                    this.$router.push('/home')
-                })
+                .then(res => res.json())
                 .then(resData => {
-                    console.log(resData)
+                    alert('Success')
+                    this.$router.go()
+                    this.$parent.loading = false
                 })
                 .catch(err => {
                     console.log(err);
+                    this.$parent.loading = false
                 });
 
 
@@ -90,7 +98,10 @@ export default {
     },
     created(){
         if(this.$cookies.get('Auth') == null || this.$cookies.get('Auth') == undefined){
-            this.$router.push('/home')
+            this.item = JSON.parse(localStorage.getItem('TakerItem'))
+            console.log(this.item)
+            // this.$router.push('/home')
+            this.$parent.popUpClose()
         }
     }
 

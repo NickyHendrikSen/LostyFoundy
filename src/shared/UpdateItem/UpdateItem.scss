@@ -1,0 +1,94 @@
+#app{
+    margin-top: 0 !important;
+}
+.insert-title{
+    margin-top: 0px !important;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+}
+.item-image{
+    max-width: 100%;
+}
+.insert-close{
+    padding: 1px 5px;
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;;
+    outline: none;
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    font-size: 20px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    &:hover{
+        background-color: #c7c7c783;
+    }
+}
+.insert-wrapper{
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px #38383883;
+    padding: 10px;
+    justify-content: center;
+    max-height: 80vh;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    transform: translate(10%, -50%);
+    overflow-y: scroll;
+        .insert-input{
+            width: 90%;
+            margin-left: 5% !important;
+            margin-top: 10px !important;
+            .insert-input-name{
+                font-size: 23px;
+                color: black;
+            }
+            input{
+                margin-top: 5px !important;
+                width: 100%;
+                text-align: center;
+                border: none;
+                border-bottom: 1px solid black;
+                outline: none;
+                font-size: 18px;
+                transition-duration: 0.2s;
+                &:focus{
+                    background-color: rgba(207, 207, 207, 0.562);
+                }
+            }
+        }
+    .btnInsert{
+        background-color: white;
+        color: black;
+        border-radius: 4px;
+        border: 1px solid black;
+        transition-duration: 0.2s;
+        outline: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin-top: 10px !important;
+        &:hover{
+            background-color: rgba(207, 207, 207, 0.562);
+        }
+    }
+}
+.item-update{
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    border: 1px solid black;
+    transition-duration: 0.2s;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 15px !important;
+    &:hover{
+        background-color: rgba(207, 207, 207, 0.562);
+    }
+}

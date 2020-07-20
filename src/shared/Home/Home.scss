@@ -6,25 +6,133 @@
     margin-top: 0 !important;
 }
 .navBar{
-    min-height: 80px;
+    min-height: 50px;
     display: flex;
-    justify-content: center;
-    button{
+    justify-content: space-between;
+    background-color:#343a40;
+    .navBar-right{
+        line-height: 50px;
         width: 100%;
-        cursor: pointer;
-        transition-duration: 0.2s;
-        border: none;
-        outline: none;
-        color: black;
-        font-weight: bold;
-        &:hover{
-            background-color: rgba(160, 160, 160, 0.315);
+        button{
+            line-height: 25px;
+            vertical-align: middle;
+            color: #28a745;
+            border: 1px solid #28a745;
+            border-radius: 4px;
+            padding: 5px 10px;
+            margin-top: 10px !important;
+            margin-left: 10px !important;
+            background-color: transparent;
+            cursor: pointer;
+            outline: none;
+            transition-duration: 0.5s;
+            &:hover{
+                background-color: #31f75f57;
+                font-weight: bold;
+            }
+            &:active{
+                transform: scale(.9,.9);
+            }
+        }
+        input{
+            line-height: 25px;
+            vertical-align: middle;
+            margin-top: 25px !important;
+            width: 90%;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid #28a745;
+            outline: none;
+            font-size: 18px;
+            transition-duration: 0.2s;
+            margin-bottom: 5px !important;
+            background-color: transparent;
+            color: white;
+            &:focus{
+                background-color: rgba(255, 255, 255, 0.418);
+            }
+        }
+    }
+    .navBar-left{
+        display: flex;
+        justify-content: center;
+        .navBar-title{
+            color: rgb(255,255,255);
+            font-weight: 300;
+            font-size: 25px;
+        }
+        div{
+            color: rgba(255,255,255,.5);
+            line-height: 30px;
+            margin: 10px !important;
+            vertical-align: middle;
+            cursor: pointer;
+            transition-duration: 0.2s;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            font-family: "Roboto";
+            outline: none;
+            font-weight: 100;
+            &:hover{
+                color: rgb(255,255,255);
+                background-color: rgba(160, 160, 160, 0.315);
+            }
         }
     }
 }
+.list-pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px !important;
+    div{
+        color: black;
+        font-size: 20px;
+    }
+    input{
+        margin-top: 5px !important;
+        width: 5%;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        font-size: 18px;
+        transition-duration: 0.2s;
+        &:focus{
+            background-color: rgba(207, 207, 207, 0.562);
+        }
+    }
+}
+.loaderWrapper{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(63, 63, 63, 0.562);
+    z-index: 1000;
+    .loader {
+        position: absolute;
+        top: calc(50% - 120px);
+        left: calc(50% - 120px);
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #28a745; /* Blue */
+        border-bottom: 16px solid #28a745; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes showList{
+    0% { transform: scale(1,0); }
+    100% { transform: scale(1,1); }
+}
 .list{
-    max-height: 70vh;
-    overflow-y: scroll;
+
     .list-header{
         display: flex;
         justify-content: center;
@@ -35,25 +143,48 @@
             color: black !important;
         }
     }
+    .list-list{
+        max-height: 70vh;
+        overflow-y: scroll;
+    }
     .list-notAvailable{
-        background-color: rgb(255, 164, 164);
+        background-color: #FA5A68;
     }
     .list-available{
-        background-color: rgb(142, 255, 142);
+        background-color: #5AFA7F;
     }
     .list-item{
+        animation-duration: 1s;
+        animation-direction: ease-in;
+        animation-name: showList;
         display: flex;
         justify-content: center;
         border: 1px solid black;
         cursor: pointer;
         transition-duration: 0.2s;
         &:hover{
-            opacity: 0.8;
+            transform: scale(1.2,1.2);
         }
         div{
             width: 100%;
             padding: 10px 20px;
             color: black;
+        }
+    }
+    .list-action{
+        display: flex;
+        justify-content: center;
+        button{
+            background-color: #6c757d;
+            color: white;
+            border-radius: 4px;
+            border: 1px solid #6c757d;
+            padding: 5px;
+            width: 100%;
+            margin: 2px !important;
+            &:hover{
+
+            }
         }
     }
 }

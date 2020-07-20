@@ -8,10 +8,14 @@
                 <select v-on:change="changeType()" v-model="type">
                     <option value="KTP">KTP</option>
                     <option value="NIM">NIM</option>
-                    <option value="Binusian ID">Binusian ID</option>
+                    <option value="BNID">BN ID</option>
+                </select>
+                <select v-on:change="changeMethod()" v-model="picmethod">
+                    <option value="Photo" v-if="type == 'KTP' || type == 'NIM' || type == 'BNID'">Photo</option>
+                    <option value="Scan" v-if="type == 'NIM' || type == 'BNID'">Scan</option>
                 </select>
             </div>
-            <component v-bind:is="type_component"></component>
+            <component v-bind:is="method_component"></component>
             <div class="taker-form" v-if="id != null">
                 <img v-bind:src="pic" class="taker-pic"/>
                 <div class="taker-form-input">
@@ -22,7 +26,8 @@
                     <div>Taker Name</div>
                     <input type="text" v-model="name"/>
                 </div>
-                <button class="btnInsertTaker" v-on:click="insertTaker()">Insert Taker</button>
+                <button class="btnInsertTaker" v-on:click="insertTaker()" v-if="item.taker == null">Insert Taker</button>
+                <button class="btnInsertTaker" v-on:click="updateTaker()" v-else>Update Taker</button>
             </div>
         </div>
         <div class="taker-inner" v-else>

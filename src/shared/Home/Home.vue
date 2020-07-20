@@ -1,48 +1,75 @@
-<template>
-    <div>
-        <div class="navBar">
-            <button v-on:click="insert()" v-if="authUser()">Insert</button>
-            <button v-on:click="logout()" v-if="authUser()">Logout</button>
-            <button v-on:click="login()" v-else>Login</button>
+    <template>
+        <div>
+        <div class="loaderWrapper" v-if="loading">
+            <div class="loader"></div>
         </div>
-        <div class="list">
-            <div class="list-header">
-                <div>Item Name</div>
-                <div>Room Found</div>
-                <div>PC Number</div>
-                <div>Found Date</div>
-                <div>Found Shift</div>
-                <div>Status</div>
-                <div>Taken By</div>
-            </div>
-            <div  v-for="(item, index) in list">
-                <div class="list-item list-notAvailable" v-if="item.TakerID == '' || item.TakerID == undefined || item.TakerID == null" v-on:click="showTaker(item, false)">
-                    <div class="list-name">{{item.ItemName}}</div>
-                    <div class="list-roomFound">{{item.RoomFound}}</div>
-                    <div class="list-pcNumber">{{item.PCNumber}}</div>
-                    <div class="list-foundDate">{{item.FoundDate}}</div>
-                    <div class="list-foundShift">{{item.FoundShift}}</div>
-                    <div class="list-statusNot" >Not Taken</div>
-                    <div class="list-statusNot">None</div>
+            <div class="navBar">
+                <div class="navBar-left">
+                    <div class="navBar-title">LostyFoundy</div>
+                    <div v-on:click="insert()" v-if="authUser()">Insert</div>
+                    <div v-on:click="logout()" v-if="authUser()">Logout</div>
+                    <div v-on:click="login()" v-else>Login</div>
                 </div>
-                <div class="list-item list-available" v-else  v-on:click="showTaker(item, true)">
-                    <div class="list-name">{{item.ItemName}}</div>
-                    <div class="list-roomFound">{{item.RoomFound}}</div>
-                    <div class="list-pcNumber">{{item.PCNumber}}</div>
-                    <div class="list-foundDate">{{item.FoundDate}}</div>
-                    <div class="list-foundShift">{{item.FoundShift}}</div>
-                    <div class="list-statusNot" >Taken</div>
-                    <div class="list-statusNot">{{item.TakerID}}</div>
+                <div class="navBar-right">
+                    <input type="text" v-model="search"/>
+                    <button v-on:click="searchAction()">Search</button>
                 </div>
             </div>
+            <div class="list">
+                <div class="list-header">
+                    <div>Item Name</div>
+                    <div>Room Found</div>
+                    <div>PC Number</div>
+                    <div>Found Date</div>
+                    <div>Found Shift</div>
+                    <div>Status</div>
+                    <div>Taken By</div>
+                    <div>Action</div>
+                </div>
+                <div  class="list-list">
+                    <div v-for="(item, index) in list">
+                        <div class="list-item list-notAvailable" v-if="item.taker == '' || item.taker == undefined || item.taker == null">
+                            <div class="list-name">{{item.ItemName}}</div>
+                            <div class="list-roomFound">{{item.RoomFound}}</div>
+                            <div class="list-pcNumber">{{item.PCNumber}}</div>
+                            <div class="list-foundDate">{{item.FoundDate}}</div>
+                            <div class="list-foundShift">{{item.FoundShift}}</div>
+                            <div class="list-statusNot" >Not Taken</div>
+                            <div class="list-statusNot">None</div>
+                            <div class="list-action">
+                                <button v-on:click="deleteItem(item)" v-if="authUser()">Delete</button>
+                                <button v-on:click="showTaker(item, true)" v-if="authUser()">Edit Taker</button>
+                                <button v-on:click="updateItem(item)" v-if="authUser()">Update</button>
+                            </div>
+                        </div>
+                        <div class="list-item list-available" v-else>
+                            <div class="list-name">{{item.ItemName}}</div>
+                            <div class="list-roomFound">{{item.RoomFound}}</div>
+                            <div class="list-pcNumber">{{item.PCNumber}}</div>
+                            <div class="list-foundDate">{{item.FoundDate}}</div>
+                            <div class="list-foundShift">{{item.FoundShift}}</div>
+                            <div class="list-statusNot" >Taken</div>
+                            <div class="list-statusNot">{{item.taker.ID}} - {{item.taker.TakerName}}</div>
+                            <div class="list-action">
+                                <button v-on:click="deleteItem(item)" v-if="authUser()">Delete</button>
+                                <button v-on:click="showTaker(item, true)" v-if="authUser()">Edit Taker</button>
+                                <button v-on:click="updateItem(item)" v-if="authUser()">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-pagination">
+                <input type ="number" min = "1" v-bind:max = "Math.ceil(length/15)" v-model = "page" v-on:blur="changePage()"/> 
+                <div>&nbsp;of {{Math.ceil(length/15)}}</div>
+            </div>
+            <component :key="renderer" v-bind:is="popup"></component>
         </div>
-        <component :key="renderer" v-bind:is="popup"></component>
-    </div>
-</template>
+    </template>
 
 
-<style lang="scss">
-    @import './Home.scss';
-</style>
+    <style lang="scss">
+        @import './Home.scss';
+    </style>
 
-<script src="./Home.js"></script>
+    <script src="./Home.js"></script>
