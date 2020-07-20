@@ -4,6 +4,7 @@ import InsertComponent from '../Insert/Insert.vue'
 import LoginComponent from '../Login/Login.vue'
 import TakerComponent from '../Taker/Taker.vue'
 import UpdateItemComponent from '../UpdateItem/UpdateItem.vue'
+import ActionComponent from '../Action/Action.vue'
 
 export default {
     name:"Login",
@@ -12,6 +13,7 @@ export default {
         'login' : LoginComponent,
         'taker' : TakerComponent,
         'updateItem' : UpdateItemComponent,
+        'action' : ActionComponent,
     },
     data(){
         return{
@@ -25,8 +27,13 @@ export default {
         }
     },
     methods:{
+        showAction(item){
+            localStorage.setItem('TakerItem', JSON.stringify(item))
+            this.popup = 'action'
+            this.$forceUpdate()
+        },
         searchAction(){
-            this.loading = false
+            this.loading = true
             this.$apollo.query({
             
                 query: gql`query {
@@ -67,6 +74,7 @@ export default {
                             this.loading = false
                         }).catch((err) => {
                             console.log(err)
+                            this.loading = false
                         })
                 }).catch((err) => {
                     console.log(err)
@@ -168,6 +176,8 @@ export default {
             this.renderer = this.renderer+1
         },
         deleteItem(item){
+            this.loading = true
+            console.log(item.ID)
             const mutation = {
                 query: `
                     mutation { 
@@ -183,15 +193,18 @@ export default {
                 body: JSON.stringify(mutation),
                 headers: {
                     'Content-Type': 'application/json',
-                    Auth: token
+                    'Auth': token
                 }
                 })
+                .then(res => res.json())
                 .then(res => {
                     console.log(res)
-                    this.$forceUpdate()
+                    alert('Success')
+                    this.$router.go()
                 })
                 .catch(err => {
                     console.log(err);
+                    this.loading = false
                 });
         }
     },

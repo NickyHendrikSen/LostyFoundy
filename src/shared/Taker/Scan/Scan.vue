@@ -1,6 +1,6 @@
 <template>
     <div class="takephoto-wrapper">
-        Scannn
+        <button v-on:click="getLast()">Get Last Tapping</button>
     </div>
 </template>
 

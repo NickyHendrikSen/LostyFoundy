@@ -24,11 +24,10 @@
                     <div>Found Shift</div>
                     <div>Status</div>
                     <div>Taken By</div>
-                    <div>Action</div>
                 </div>
                 <div  class="list-list">
                     <div v-for="(item, index) in list">
-                        <div class="list-item list-notAvailable" v-if="item.taker == '' || item.taker == undefined || item.taker == null">
+                        <div class="list-item list-notAvailable" v-if="item.taker == '' || item.taker == undefined || item.taker == null" v-on:click="showAction(item)">
                             <div class="list-name">{{item.ItemName}}</div>
                             <div class="list-roomFound">{{item.RoomFound}}</div>
                             <div class="list-pcNumber">{{item.PCNumber}}</div>
@@ -36,13 +35,8 @@
                             <div class="list-foundShift">{{item.FoundShift}}</div>
                             <div class="list-statusNot" >Not Taken</div>
                             <div class="list-statusNot">None</div>
-                            <div class="list-action">
-                                <button v-on:click="deleteItem(item)" v-if="authUser()">Delete</button>
-                                <button v-on:click="showTaker(item, true)" v-if="authUser()">Edit Taker</button>
-                                <button v-on:click="updateItem(item)" v-if="authUser()">Update</button>
-                            </div>
                         </div>
-                        <div class="list-item list-available" v-else>
+                        <div class="list-item list-available" v-else v-on:click="showAction(item)">
                             <div class="list-name">{{item.ItemName}}</div>
                             <div class="list-roomFound">{{item.RoomFound}}</div>
                             <div class="list-pcNumber">{{item.PCNumber}}</div>
@@ -50,17 +44,12 @@
                             <div class="list-foundShift">{{item.FoundShift}}</div>
                             <div class="list-statusNot" >Taken</div>
                             <div class="list-statusNot">{{item.taker.ID}} - {{item.taker.TakerName}}</div>
-                            <div class="list-action">
-                                <button v-on:click="deleteItem(item)" v-if="authUser()">Delete</button>
-                                <button v-on:click="showTaker(item, true)" v-if="authUser()">Edit Taker</button>
-                                <button v-on:click="updateItem(item)" v-if="authUser()">Update</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="list-pagination">
-                <input type ="number" min = "1" v-bind:max = "Math.ceil(length/15)" v-model = "page" v-on:blur="changePage()"/> 
+                <input type ="number" min = "1" v-bind:max = "Math.ceil(length/15)" v-model = "page" v-on:keyup.enter="changePage()"/> 
                 <div>&nbsp;of {{Math.ceil(length/15)}}</div>
             </div>
             <component :key="renderer" v-bind:is="popup"></component>

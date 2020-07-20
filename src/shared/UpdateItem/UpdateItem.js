@@ -21,6 +21,7 @@ export default {
             this.item.ItemImage = url
         },
         update(){
+            this.$parent.loading = true
             let itemToBeInserted = this.item
             console.log(itemToBeInserted)
             const mutation = {
@@ -45,6 +46,7 @@ export default {
                 })
                 .then(res => {
                     console.log(res)
+                    alert('Success')
                     this.$router.go()
                 })
                 .catch(err => {

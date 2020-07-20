@@ -23,7 +23,7 @@ export default {
     },
     methods:{
         updateTaker(){
-
+            this.insertTaker()
         },
         updateItemTaker(){
             const mutation = {
@@ -48,10 +48,12 @@ export default {
                 })
                 .then(res => {
                     console.log(res)
+                    alert('Success')
                     this.$router.go()
                 })
                 .catch(err => {
                     console.log(err);
+                    this.$parent.loading = false
                 });
         },
         insertTaker(){
@@ -60,6 +62,7 @@ export default {
             // console.log(this.name)
             // console.log(this.pic)
             // return
+            this.$parent.loading = true
             const mutation = {
                 query: `
                     mutation { 
@@ -87,16 +90,28 @@ export default {
                 })
                 .catch(err => {
                     console.log(err);
+                    this.$parent.loading = false
                 });
         },
         changeType(){
             this.method_component = null
             this.picmethod = null
+            this.id = null
         },
         typeClose(){
             this.type_component = null
         },
+        updateScan(info){
+            if(this.type == "NIM"){
+                this.id = info.card.NIM
+            }
+            else if(this.type == "BNID"){
+                this.id = info.card.BNID
+            }
+            this.name = info.card.Name
+        },
         updatePicture(pic){
+            this.$parent.loading = true
             this.pic = pic
             const mutation = {
                 query: `
@@ -126,15 +141,18 @@ export default {
                     this.id = data.ID
                     this.name = data.Name
                     console.log(data)
+                    this.$parent.loading = false
                 })
                 .catch(err => {
                     console.log(err);
+                    this.$parent.loading = false
                 });
 
         },
         changeMethod(){
             localStorage.setItem("PicMethod", this.picmethod)
             this.method_component = this.picmethod
+            this.id = null
         },
         close(){
             this.$parent.popUpClose()

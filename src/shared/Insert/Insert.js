@@ -57,7 +57,7 @@ export default {
                 body: JSON.stringify(mutation),
                 headers: {
                     'Content-Type': 'application/json',
-                    Auth: token
+                    'Auth': token
                 }
                 })
                 .then(res => res.json())
