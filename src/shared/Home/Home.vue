@@ -30,7 +30,7 @@
                         <div class="list-item list-notAvailable" v-if="item.taker == '' || item.taker == undefined || item.taker == null" v-on:click="showAction(item)">
                             <div class="list-name">{{item.ItemName}}</div>
                             <div class="list-roomFound">{{item.RoomFound}}</div>
-                            <div class="list-pcNumber">{{item.PCNumber}}</div>
+                            <div class="list-pcNumber">{{item.PCNumber ? item.PCNumber : "-"}}</div>
                             <div class="list-foundDate">{{item.FoundDate}}</div>
                             <div class="list-foundShift">{{item.FoundShift}}</div>
                             <div class="list-statusNot" >Not Taken</div>
@@ -39,7 +39,7 @@
                         <div class="list-item list-available" v-else v-on:click="showAction(item)">
                             <div class="list-name">{{item.ItemName}}</div>
                             <div class="list-roomFound">{{item.RoomFound}}</div>
-                            <div class="list-pcNumber">{{item.PCNumber}}</div>
+                            <div class="list-pcNumber">{{item.PCNumber ? item.PCNumber : "-"}}</div>
                             <div class="list-foundDate">{{item.FoundDate}}</div>
                             <div class="list-foundShift">{{item.FoundShift}}</div>
                             <div class="list-statusNot" >Taken</div>

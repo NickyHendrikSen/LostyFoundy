@@ -45,7 +45,6 @@ export default {
                         insertItem(itemInput: {ItemName : "${itemToBeInserted.ItemName}", RoomFound : "${itemToBeInserted.RoomFound}", PCNumber : ${itemToBeInserted.PCNumber}, FoundDate : "${itemToBeInserted.FoundDate.toString()}", FoundShift : ${itemToBeInserted.FoundShift}, ItemImage : "${this.pic}"}){
                             ID
                         }
-                        
                     }
                 `
             }
@@ -62,6 +61,7 @@ export default {
                 })
                 .then(res => res.json())
                 .then(resData => {
+                    console.log(resData)
                     alert('Success')
                     this.$router.go()
                     this.$parent.loading = false

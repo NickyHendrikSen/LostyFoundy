@@ -28,6 +28,7 @@ export default {
     },
     methods:{
         showAction(item){
+            console.log(item.taker)
             localStorage.setItem('TakerItem', JSON.stringify(item))
             this.popup = 'action'
             this.$forceUpdate()
@@ -40,7 +41,7 @@ export default {
                     items (filterName: "${this.search}") {
                         ID,
                         user{UserName},
-                        taker{ID, TakerName},
+                        taker{ID, TakerName, TakerImage},
                         ItemName,
                         RoomFound,
                         PCNumber,
@@ -58,7 +59,7 @@ export default {
                             items (filterName : "${this.search}", skip: ${(this.page-1)*15}, take: ${15}){
                                 ID,
                                 user{UserName},
-                                taker{ID, TakerName},
+                                taker{ID, TakerName, TakerImage},
                                 ItemName,
                                 RoomFound,
                                 PCNumber,
@@ -90,7 +91,7 @@ export default {
                     items {
                         ID,
                         user{UserName},
-                        taker{ID, TakerName},
+                        taker{ID, TakerName, TakerImage},
                         ItemName,
                         RoomFound,
                         PCNumber,
@@ -108,7 +109,7 @@ export default {
                             items (skip: ${(this.page-1)*15}, take: ${15}){
                                 ID,
                                 user{UserName},
-                                taker{ID, TakerName},
+                                taker{ID, TakerName, TakerImage},
                                 ItemName,
                                 RoomFound,
                                 PCNumber,
@@ -140,12 +141,10 @@ export default {
         logout(){
             this.$cookies.remove('Auth')
             this.$forceUpdate();
-            this.popup.$forceUpdate()
         },
         login(){
             this.popup = 'login'
             this.$forceUpdate();
-            this.popup.$forceUpdate()
             // this.$router.push('/login')
         },
         insert(){
@@ -215,7 +214,7 @@ export default {
                 items {
                     ID,
                     user{UserName},
-                    taker{ID, TakerName},
+                    taker{ID, TakerName, TakerImage},
                     ItemName,
                     RoomFound,
                     PCNumber,
@@ -233,7 +232,7 @@ export default {
                         items (skip: ${(this.page-1)*15}, take: ${15}){
                             ID,
                             user{UserName},
-                            taker{ID, TakerName},
+                            taker{ID, TakerName, TakerImage},
                             ItemName,
                             RoomFound,
                             PCNumber,

@@ -25,6 +25,19 @@
                     <div class="action-card-name">Found Shift</div>
                     <div class="action-card-info">{{item.FoundShift}}</div>
                 </div>
+                <div class="action-card" v-if="$parent.authUser()">
+                    <div class="action-card-name">Taker Image</div>
+                    <div class="action-card-info"><img v-bind:src="takerImage" class="item-image"/></div>
+                </div>
+                <div class="action-card">
+                    <div class="action-card-name">Taker ID</div>
+                    <div class="action-card-info">{{item.taker.ID}}</div>
+                </div>
+                <div class="action-card">
+                    <div class="action-card-name">Taker Name</div>
+                    <div class="action-card-info">{{item.taker.TakerName}}</div>
+                </div>
+                
                 <div class="action-action" v-if="$parent.authUser()">
                     <button v-on:click="$parent.deleteItem(item)" class="action-delete">Delete</button>
                     <button v-on:click="$parent.showTaker(item)" class="action-edit">Edit Taker</button>
